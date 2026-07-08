@@ -200,3 +200,8 @@ enum class Cmd_CAN_LaBox : uint16_t
  *  ID Carte CLF - Centrale de Logique Ferrovière
  * ==========================================================================*/
 constexpr uint16_t CLF_ID = 253;
+
+/* ============================================================================
+ *  ID Carte ERM - Exploration Reseau Maitre
+ * ==========================================================================*/
+constexpr uint16_t ERM_ID = 254;
