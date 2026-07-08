@@ -1,0 +1,18 @@
+{
+  "name": "DiscoveryProtocol",
+  "version": "1.0.0",
+  "description": "Protocole commun Discovery 2026 pour CC, CLF, ERM, EXSA, Booster, LaBox",
+  "keywords": ["protocol", "can", "discovery"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prune74/DiscoveryProtocol.git"
+  },
+  "authors": [
+    {
+      "name": "Bruno",
+      "email": "contact@example.com"
+    }
+  ],
+  "frameworks": ["arduino"],
+  "platforms": ["espressif32"]
+}
