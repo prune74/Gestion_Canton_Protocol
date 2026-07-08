@@ -3,7 +3,7 @@
 
 /*
  * ============================================================================
- *  Protocol.h — Discovery 2026
+ *  Protocol.h — Gestion Canton
  * ============================================================================
  *  Structure modernisée :
  *    → une enum class par liaison CAN

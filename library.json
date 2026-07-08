@@ -1,16 +1,16 @@
 {
-  "name": "DiscoveryProtocol",
+  "name": "Gestion_Canton_Protocol",
   "version": "1.0.0",
-  "description": "Protocole commun Discovery 2026 pour CC, CLF, ERM, EXSA, Booster, LaBox",
-  "keywords": ["protocol", "can", "discovery"],
+  "description": "Protocole commun Gestion Canton pour CC, CLF, ERM, LaBox",
+  "keywords": ["Protocol", "can", "Gestion_Canton"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/prune74/DiscoveryProtocol.git"
+    "url": "https://github.com/prune74/Gestion_Canton_Protocol.git"
   },
   "authors": [
     {
       "name": "Bruno",
-      "email": "contact@example.com"
+      "email": "Gestion_Canton@gmail.com"
     }
   ],
   "frameworks": ["arduino"],
