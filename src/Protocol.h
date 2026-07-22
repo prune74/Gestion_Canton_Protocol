@@ -95,7 +95,7 @@ enum class Cmd_CC_to_CC : uint16_t
     ASPECT_VOISIN = 0xE7,
     AIGUILLAGE = 0xE9,
     MESURE_PREPARE = 0xEB, // CC0 → CCx : préparer la mesure de vitesse
-    RECHERCHE_WAGON: = 0xEC, // CC0 → CCx : Recherche directionnelle des wagons fugueurs
+    RECHERCHE_WAGON = 0xEC, // CC0 → CCx : Recherche directionnelle des wagons fugueurs
 };
 
 /* ============================================================================
