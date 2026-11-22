@@ -53,6 +53,7 @@ enum class Cmd_EXCC_to_CC : uint16_t
 {
     PONG = 0xD1,
     BOOSTER_INFO = 0xD2,
+    BOOSTER_ASSOCIATION_RESULT = 0xD3,
     POSITION_AIGUILLE = 0xD6,
     OCCUPATION = 0xD7,
     PONCTUEL_H = 0xD8,
@@ -67,6 +68,7 @@ enum class Cmd_EXCC_to_CC : uint16_t
  * ==========================================================================*/
 enum class Cmd_CC_to_EXCC : uint16_t
 {
+    CLEAR_BOOSTER_ID = 0xED,
     SERVO_MOVE = 0xF0,
     SERVO_CONFIG = 0xF1,
     SERVO_TEST = 0xF2,
@@ -82,7 +84,23 @@ enum class Cmd_CC_to_EXCC : uint16_t
     PING = 0xFC,
     CANTON_ID = 0xFD,
     PROFILE_VOIE = 0xFE,
+    BOOSTER_ASSOCIATION_VALIDATE = 0xEE,
+    BOOSTER_DISCOVERY_MODE = 0xEF,
 };
+
+/*
+ * Relais découverte booster (CAN Commands 29 bits, DLC 8):
+ * - Le CC dont l'ID égale la cible traite le broadcast Service 0xC4; les
+ *   autres CC l'ignorent. BOOSTER_ASSOCIATION_VALIDATE (CC -> EXCC, 0xEE)
+ *   transporte sans modification le payload de Service 0xC4. EXCC relaie la demande en UART
+ *   0x16. BOOSTER_ASSOCIATION_RESULT (EXCC -> CC, 0xD3) retourne le même
+ *   transaction/ID avec le code résultat de 0xC4.
+ * - CLEAR_BOOSTER_ID (CC -> EXCC, 0xED) est l'ordre explicite d'effacement
+ *   de l'ID mémorisé du booster; EXCC la relaie en UART 0x17. L'ID 0xFF reçu
+ *   par le chemin normal CANTON_ID ne constitue pas à lui seul cet ordre.
+ * - BOOSTER_DISCOVERY_MODE (CC -> EXCC, 0xEF) transporte le payload Service
+ *   0xC5; EXCC relaie seulement son octet d'autorisation en UART 0x15.
+ */
 
 /* ============================================================================
  *  COMMANDES CC ↔ CC (Exploitation ferroviaire)
