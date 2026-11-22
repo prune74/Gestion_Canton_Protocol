@@ -14,6 +14,9 @@ La lecture des corrections enregistrées utilise CAN Service `0xC6` et UART
 `0x18`; le résultat revient sur UART `0x14`. Elle ne modifie pas le Booster.
 Le réglage reste séparé sous `0xBA` et UART `0x13`.
 
+La version `v1.3.0` est publiée sur GitHub. Les firmwares consommateurs
+CC, EXCC, Booster et ERM sont compilés contre cette version.
+
 ## Version 1.2.0
 
 Ajoute le relais de réglage des demi-bits du Booster :
