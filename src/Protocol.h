@@ -55,6 +55,7 @@ enum class Cmd_EXCC_to_CC : uint16_t
     BOOSTER_INFO = 0xD2,
     BOOSTER_ASSOCIATION_RESULT = 0xD3,
     BOOSTER_TIMING_RESULT = 0xD4,
+    BOOSTER_TIMING_READ_RESULT = 0xD5,
     POSITION_AIGUILLE = 0xD6,
     OCCUPATION = 0xD7,
     PONCTUEL_H = 0xD8,
@@ -88,6 +89,7 @@ enum class Cmd_CC_to_EXCC : uint16_t
     BOOSTER_ASSOCIATION_VALIDATE = 0xEE,
     BOOSTER_DISCOVERY_MODE = 0xEF,
     BOOSTER_TIMING_SET = 0xEA,
+    BOOSTER_TIMING_READ = 0xE8,
 };
 
 /*
@@ -105,6 +107,9 @@ enum class Cmd_CC_to_EXCC : uint16_t
  * - BOOSTER_TIMING_SET (CC -> EXCC, 0xEA) relaie la demande Service 0xBA
  *   inchangée vers UART 0x13; BOOSTER_TIMING_RESULT (EXCC -> CC, 0xD4)
  *   retourne la réponse applicative UART 0x14 pour publication en réponse 0xBA.
+ * - BOOSTER_TIMING_READ (CC -> EXCC, 0xE8) relaie la lecture Service 0xC6
+ *   vers UART 0x18; BOOSTER_TIMING_READ_RESULT (EXCC -> CC, 0xD5) retourne
+ *   les corrections sauvegardées pour publication en réponse Service 0xC6.
  */
 
 /* ============================================================================

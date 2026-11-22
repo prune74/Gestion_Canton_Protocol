@@ -3,6 +3,17 @@
 Bibliothèque partagée des commandes CAN Commands 29 bits entre CC et EXCC,
 ainsi que des autres commandes du réseau Gestion Canton.
 
+## Version 1.3.0
+
+Ajoute le résultat de lecture des corrections Booster (`0xD5`) et son relais
+CC → EXCC (`0xE8`). Ajoute également `src/UartProtocol.h`, le format UART v2
+commun utilisé par l’EXCC et le Booster : types de trames, séquences, CRC-16,
+encodage et décodage.
+
+La lecture des corrections enregistrées utilise CAN Service `0xC6` et UART
+`0x18`; le résultat revient sur UART `0x14`. Elle ne modifie pas le Booster.
+Le réglage reste séparé sous `0xBA` et UART `0x13`.
+
 ## Version 1.2.0
 
 Ajoute le relais de réglage des demi-bits du Booster :
