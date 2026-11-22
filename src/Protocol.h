@@ -54,6 +54,7 @@ enum class Cmd_EXCC_to_CC : uint16_t
     PONG = 0xD1,
     BOOSTER_INFO = 0xD2,
     BOOSTER_ASSOCIATION_RESULT = 0xD3,
+    BOOSTER_TIMING_RESULT = 0xD4,
     POSITION_AIGUILLE = 0xD6,
     OCCUPATION = 0xD7,
     PONCTUEL_H = 0xD8,
@@ -86,6 +87,7 @@ enum class Cmd_CC_to_EXCC : uint16_t
     PROFILE_VOIE = 0xFE,
     BOOSTER_ASSOCIATION_VALIDATE = 0xEE,
     BOOSTER_DISCOVERY_MODE = 0xEF,
+    BOOSTER_TIMING_SET = 0xEA,
 };
 
 /*
@@ -100,6 +102,9 @@ enum class Cmd_CC_to_EXCC : uint16_t
  *   par le chemin normal CANTON_ID ne constitue pas à lui seul cet ordre.
  * - BOOSTER_DISCOVERY_MODE (CC -> EXCC, 0xEF) transporte le payload Service
  *   0xC5; EXCC relaie seulement son octet d'autorisation en UART 0x15.
+ * - BOOSTER_TIMING_SET (CC -> EXCC, 0xEA) relaie la demande Service 0xBA
+ *   inchangée vers UART 0x13; BOOSTER_TIMING_RESULT (EXCC -> CC, 0xD4)
+ *   retourne la réponse applicative UART 0x14 pour publication en réponse 0xBA.
  */
 
 /* ============================================================================
