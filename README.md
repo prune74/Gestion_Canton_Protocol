@@ -3,6 +3,22 @@
 Bibliothèque partagée des commandes CAN Commands 29 bits entre CC et EXCC,
 ainsi que des autres commandes du réseau Gestion Canton.
 
+## Version 1.4.0
+
+Ajoute le relais de mesure de tension des rails Booster vers le CC :
+
+| Sens | Code | Fonction |
+|---|---:|---|
+| EXCC → CC | `0xDD` | Relais de la mesure des rails du Booster vers le CC. |
+
+Trame CAN Commands de 8 octets : `[0..1]` tension en millivolts, uint16
+little-endian; `[2]` validité (`1` valide, `0` invalide); `[3..7]` réservés
+à zéro. Le CC déduit l’ID du Booster de son association avec l’EXCC et relaie
+la mesure vers CAN Service `0xC7`.
+
+Ajoute aussi le type UART v2 `BOOSTER_RAIL_VOLTAGE (0x19)`, DLC 3 : tension
+en millivolts uint16 little-endian, puis validité (`1` valide, `0` invalide).
+
 ## Version 1.3.0
 
 Ajoute le résultat de lecture des corrections Booster (`0xD5`) et son relais

@@ -63,6 +63,7 @@ enum class Cmd_EXCC_to_CC : uint16_t
     RAILCOM_ADRESSE = 0xDA,
     CALIB_BOOSTER_INFO = 0xDB,
     ESSIEUX = 0xDC,
+    BOOSTER_RAIL_VOLTAGE = 0xDD,
 };
 
 /* ============================================================================
@@ -110,6 +111,10 @@ enum class Cmd_CC_to_EXCC : uint16_t
  * - BOOSTER_TIMING_READ (CC -> EXCC, 0xE8) relaie la lecture Service 0xC6
  *   vers UART 0x18; BOOSTER_TIMING_READ_RESULT (EXCC -> CC, 0xD5) retourne
  *   les corrections sauvegardées pour publication en réponse Service 0xC6.
+ * - BOOSTER_RAIL_VOLTAGE (EXCC -> CC, 0xDD) relaie la télémétrie rails du
+ *   Booster inchangée : DLC 8, [0..1] millivolts uint16 LE, [2] validité
+ *   (1 valide, 0 invalide), [3..7] réservés à zéro. L'ID du Booster est
+ *   déduit de son association au chemin CC/EXCC.
  */
 
 /* ============================================================================

@@ -30,6 +30,7 @@ enum class Type : uint8_t
     DCC_TIMING_SET = 0x13,
     DCC_TIMING_RESULT = 0x14,
     DCC_TIMING_READ = 0x18,
+    BOOSTER_RAIL_VOLTAGE = 0x19,
     SAMPLE = 0x10,
     RAILCOM = 0x11
 };
@@ -51,6 +52,8 @@ struct Frame
 // result, saved half-bit-1 correction µs, saved half-bit-0 correction µs].
 // DCC_TIMING_READ 0x18 payload is the transaction ID (uint16 LE); the Booster
 // answers with DCC_TIMING_RESULT without changing its stored corrections.
+// BOOSTER_RAIL_VOLTAGE 0x19 payload is [0..1] measured rail voltage in mV,
+// uint16 LE, and [2] validity (1 valid, 0 invalid). Sent once per second.
 
 inline uint16_t crc16CcittFalse(const uint8_t *data, size_t length)
 {
