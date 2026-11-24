@@ -31,8 +31,20 @@ enum class Type : uint8_t
     DCC_TIMING_RESULT = 0x14,
     DCC_TIMING_READ = 0x18,
     BOOSTER_RAIL_VOLTAGE = 0x19,
+    PROFILE_SETPOINT = 0x1A,
+    PROFILE_SETPOINT_RESULT = 0x1B,
     SAMPLE = 0x10,
     RAILCOM = 0x11
+};
+
+enum class ProfileSetpointResult : uint8_t
+{
+    ACCEPTED = 0,
+    NOT_IN_EXPLORATION = 1,
+    INVALID_PROFILE = 2,
+    INVALID_SETPOINT = 3,
+    APPLICATION_FAILED = 4,
+    TRANSACTION_CONFLICT = 5
 };
 
 struct Frame
@@ -54,6 +66,17 @@ struct Frame
 // answers with DCC_TIMING_RESULT without changing its stored corrections.
 // BOOSTER_RAIL_VOLTAGE 0x19 payload is [0..1] measured rail voltage in mV,
 // uint16 LE, and [2] validity (1 valid, 0 invalid). Sent once per second.
+// PROFILE_SETPOINT 0x1A payload is the 8-byte CAN Service 0xC9 request,
+// unchanged: version, target class, profile, setpoint mV, transaction, zero.
+// PROFILE_SETPOINT_RESULT 0x1B, DLC 3, payload is [0..1] transaction uint16
+// LE, [2] ProfileSetpointResult. It is an application result, separate from
+// the generic UART transport ACK. These numeric assignments are approved.
+// Mapping to CAN Service 0xC9:
+// ACCEPTED->0, NOT_IN_EXPLORATION->1, INVALID_PROFILE->3,
+// INVALID_SETPOINT->4, APPLICATION_FAILED->6, TRANSACTION_CONFLICT->7. No
+// UART result is used for INVALID_RECIPIENT (2) or BOOSTER_UNCONFIRMED (5).
+// The Booster keeps only the latest PROFILE_SETPOINT transaction/request/result
+// in volatile memory; a new transaction replaces it and reboot clears it.
 
 inline uint16_t crc16CcittFalse(const uint8_t *data, size_t length)
 {

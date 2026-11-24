@@ -3,6 +3,24 @@
 Bibliothèque partagée des commandes CAN Commands 29 bits entre CC et EXCC,
 ainsi que des autres commandes du réseau Gestion Canton.
 
+## Version candidate 1.5.0 — préparée localement, non publiée
+
+Le prochain contrat prévoit les relais de profil/consigne : CAN Commands
+`0xE6` (CC → EXCC, demande `0xC9` inchangée) et `0xDE` (EXCC → CC, résultat
+applicatif), ainsi que UART `0x1A`/`0x1B` entre EXCC et Booster. Le format des
+relais est consigné dans le suivi. Les résultats UART sont fixés : `0` accepté,
+`1` mauvais mode, `2` profil invalide, `3` consigne invalide, `4` échec
+d'application; `5` signifie conflit de transaction et devient le résultat CAN
+`7`. EXCC réessaie UART `0x1A` une fois après 500 ms; sans réponse applicative
+dans les 1 000 ms suivant la première tentative, il retourne le résultat CAN
+`5=Booster non confirmé`. Ces modifications candidates ne font pas partie de
+la version publiée `1.4.0` et ne sont pas intégrées aux firmwares.
+Les destinataires gardent en RAM la dernière transaction `0xC9`, sa demande
+exacte et son résultat; une répétition identique renvoie ce résultat, un
+contenu différent avec le même numéro renvoie `7`. Une nouvelle transaction
+remplace l’entrée; un redémarrage l’efface. L’ERM attend la fin ou le délai
+d’expiration avant d’en démarrer une autre.
+
 ## Version 1.4.0
 
 Ajoute le relais de mesure de tension des rails Booster vers le CC :

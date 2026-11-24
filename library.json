@@ -1,6 +1,6 @@
 {
   "name": "Gestion_Canton_Protocol",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Protocole commun Gestion Canton pour CC, CLF, ERM, LaBox",
   "keywords": ["Protocol", "can", "Gestion_Canton"],
   "repository": {

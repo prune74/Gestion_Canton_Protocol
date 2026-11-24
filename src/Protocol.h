@@ -64,6 +64,7 @@ enum class Cmd_EXCC_to_CC : uint16_t
     CALIB_BOOSTER_INFO = 0xDB,
     ESSIEUX = 0xDC,
     BOOSTER_RAIL_VOLTAGE = 0xDD,
+    BOOSTER_PROFILE_SETPOINT_RESULT = 0xDE,
 };
 
 /* ============================================================================
@@ -91,6 +92,7 @@ enum class Cmd_CC_to_EXCC : uint16_t
     BOOSTER_DISCOVERY_MODE = 0xEF,
     BOOSTER_TIMING_SET = 0xEA,
     BOOSTER_TIMING_READ = 0xE8,
+    BOOSTER_PROFILE_SETPOINT = 0xE6,
 };
 
 /*
@@ -115,6 +117,19 @@ enum class Cmd_CC_to_EXCC : uint16_t
  *   Booster inchangée : DLC 8, [0..1] millivolts uint16 LE, [2] validité
  *   (1 valide, 0 invalide), [3..7] réservés à zéro. L'ID du Booster est
  *   déduit de son association au chemin CC/EXCC.
+ * - BOOSTER_PROFILE_SETPOINT (CC -> EXCC, 0xE6) relaie sans modification
+ *   les 8 octets de la demande CAN Service 0xC9. EXCC envoie la même charge
+ *   utile au Booster par UART 0x1A.
+ * - BOOSTER_PROFILE_SETPOINT_RESULT (EXCC -> CC, 0xDE) porte le résultat
+ *   applicatif : [0..1] transaction uint16 LE, [2] résultat 0..7 de la
+ *   réponse CAN Service 0xC9, [3..7] réservés à zéro. Le CC reconstruit la
+ *   réponse 0xC9 en réutilisant les champs mémorisés de la demande.
+ *   Correspondance UART 0x1B → CAN 0xC9 : 0→0, 1→1, 2→3, 3→4, 4→6, 5→7.
+ *   EXCC retente UART 0x1A après 500 ms; sans réponse applicative dans les
+ *   1000 ms suivant le premier envoi, il retourne CAN 5=Booster non confirmé.
+ *   Chaque destinataire garde en mémoire volatile la transaction C9 la plus
+ *   récente, sa demande et son résultat; la suivante la remplace. Au reboot,
+ *   la mémoire est vidée. L’ERM ne lance pas de transaction en parallèle.
  */
 
 /* ============================================================================
