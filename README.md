@@ -13,8 +13,9 @@ UART sont fixés : `0` accepté,
 d'application; `5` signifie conflit de transaction et devient le résultat CAN
 `7`. EXCC réessaie UART `0x1A` une fois après 500 ms; sans réponse applicative
 dans les 1 000 ms suivant la première tentative, il retourne le résultat CAN
-`5=Booster non confirmé`. Cette version est publiée; les firmwares ne sont pas
-encore adaptés à ces relais et résultats.
+`5=Booster non confirmé`. Cette version est publiée; les firmwares ERM, CC,
+EXCC et Booster concernés sont migrés et compilent. Les échanges réels restent
+à vérifier.
 Les destinataires gardent en RAM la dernière transaction `0xC9`, sa demande
 exacte et son résultat; une répétition identique renvoie ce résultat, un
 contenu différent avec le même numéro renvoie `7`. Une nouvelle transaction
