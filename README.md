@@ -13,13 +13,11 @@ Corrige les identités CAN selon la convention CFC validée :
 | `ERM_ID` | 254 | **253** |
 
 Convention complète : CC `1..250`, carte réservée `251`, CLF `252`,
-ERM unique `253`, LaBox `254`, `255` réservé. Les firmwares CC, EXCC, CLF,
-ERM (ancien et fusionné) et Booster DRV8874 référencent désormais la copie
-locale de ce dépôt dans leur `platformio.ini` (les corrections ne seraient
-sinon jamais prises en compte tant que la version GitHub 1.5.0 est épinglée).
-Quand la publication GitHub reprendra : pousser ce dépôt, créer le tag
-`v1.6.0`, puis réépingler les firmwares. Compilations des cinq firmwares OK ;
-les échanges réels restent à vérifier.
+ERM unique `253`, LaBox `254`, `255` réservé. La version est publiée
+(`main` + tag `v1.6.0`) ; les firmwares CC, EXCC, CLF, ERM (ancien et
+fusionné) et Booster DRV8874 épinglent `#v1.6.0` dans leur `platformio.ini`.
+Compilations des six firmwares OK contre le tag publié ; les échanges réels
+restent à vérifier.
 
 ## Version 1.5.0 — publiée (`774e6c6`)
 
