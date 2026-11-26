@@ -3,6 +3,24 @@
 Bibliothèque partagée des commandes CAN Commands 29 bits entre CC et EXCC,
 ainsi que des autres commandes du réseau Gestion Canton.
 
+## Version 1.6.0 — locale (`e07805a`, pas encore poussée)
+
+Corrige les identités CAN selon la convention CFC validée :
+
+| Constante | Avant | Après |
+|---|---:|---:|
+| `CLF_ID` | 253 | **252** |
+| `ERM_ID` | 254 | **253** |
+
+Convention complète : CC `1..250`, carte réservée `251`, CLF `252`,
+ERM unique `253`, LaBox `254`, `255` réservé. Les firmwares CC, EXCC, CLF,
+ERM (ancien et fusionné) et Booster DRV8874 référencent désormais la copie
+locale de ce dépôt dans leur `platformio.ini` (les corrections ne seraient
+sinon jamais prises en compte tant que la version GitHub 1.5.0 est épinglée).
+Quand la publication GitHub reprendra : pousser ce dépôt, créer le tag
+`v1.6.0`, puis réépingler les firmwares. Compilations des cinq firmwares OK ;
+les échanges réels restent à vérifier.
+
 ## Version 1.5.0 — publiée (`774e6c6`)
 
 Cette version définit les relais de profil/consigne : CAN Commands
